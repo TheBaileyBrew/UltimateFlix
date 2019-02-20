@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "172090764084",
+    "firebase_url": "https://ultimateflix-54853.firebaseio.com",
+    "project_id": "ultimateflix-54853",
+    "storage_bucket": "ultimateflix-54853.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:172090764084:android:5f29ba4cb04520f4",
+        "android_client_info": {
+          "package_name": "com.thebaileybrew.ultimateflix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "172090764084-4h0v5tbct44rbd6j8hobighn1o2jpiff.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thebaileybrew.ultimateflix",
+            "certificate_hash": "6fbda0ea65aa6c34080db7d332707e45accc9091"
+          }
+        },
+        {
+          "client_id": "172090764084-b35415keb2dq2nh3mkmaj5e0l476l7al.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALmhAXKLIxR6JAumZXyT3kNYhkjIP6dOo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "172090764084-b35415keb2dq2nh3mkmaj5e0l476l7al.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
