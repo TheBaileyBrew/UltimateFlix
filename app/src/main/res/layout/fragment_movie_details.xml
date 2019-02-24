@@ -73,38 +73,108 @@
         app:layout_constraintTop_toBottomOf="@id/synopsis_text"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="@dimen/margin_vertical_8dp">
+        <!-- Runtime & Release Date-->
         <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="100dp"
-            android:layout_margin="@dimen/half_margin_vertical_4dp">
+            android:layout_margin="@dimen/margin_horizontal_8dp"
+            app:cardCornerRadius="@dimen/half_margin_vertical_4dp"
+            android:elevation="6dp">
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/half_margin_vertical_4dp">
+            <TextView
+                android:id="@+id/runtime_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_margin_vertical_4dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="RUNTIME"/>
+            <TextView
+                android:id="@+id/runtime_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_margin_vertical_4dp" />
+            <TextView
+                android:id="@+id/language_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="@dimen/half_margin_vertical_4dp"
+                android:text="LANGUAGE"/>
+            <TextView
+                android:id="@+id/language_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/half_margin_vertical_4dp" />
+
+        </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!-- Language & Vote Count/Total -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="100dp"
+            android:layout_margin="@dimen/margin_horizontal_8dp"
+            app:cardCornerRadius="@dimen/half_margin_vertical_4dp"
+            android:elevation="6dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="@dimen/half_margin_vertical_4dp">
                 <TextView
-                    android:id="@+id/runtime_header"
+                    android:id="@+id/budget_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/half_margin_vertical_4dp"
-                    android:text="RUNTIME"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="BUDGET"/>
                 <TextView
-                    android:id="@+id/runtime_detail"
+                    android:id="@+id/budget_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/half_margin_vertical_4dp" />
                 <TextView
-                    android:id="@+id/release_header"
+                    android:id="@+id/revenue_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/half_margin_vertical_4dp"
-                    android:text="RELEASE"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="REVENUE"/>
                 <TextView
-                    android:id="@+id/release_detail"
+                    android:id="@+id/revenue_detail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/half_margin_vertical_4dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+        <!-- Static Progress Imagery-->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="100dp"
+            android:layout_margin="@dimen/margin_horizontal_8dp"
+            app:cardCornerRadius="@dimen/half_margin_vertical_4dp"
+            android:elevation="6dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/half_margin_vertical_4dp">
+                <com.thebaileybrew.ultimateflix.adapters.StaticProgressBar
+                    android:id="@+id/popularity_details"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    app:arc_stroke_width="10dp"
+                    app:arc_text_size="20sp"
+                    app:arc_text_color="@color/colorPrimaryDark"
+                    app:arc_bottom_text_size="12sp"
+                    app:arc_bottom_text="RATING"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

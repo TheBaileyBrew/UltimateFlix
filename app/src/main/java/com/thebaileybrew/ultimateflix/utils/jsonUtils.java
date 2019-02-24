@@ -21,6 +21,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -181,6 +182,8 @@ public class jsonUtils {
         String movieTagline;
         int movieRuntime;
         String movieGenre;
+        int movieBudget;
+        int movieRevenue;
 
         if (TextUtils.isEmpty(jsonReturn)) {
             return null;
@@ -190,19 +193,31 @@ public class jsonUtils {
             JSONObject baseJsonResponse = new JSONObject(jsonReturn);
             movieTagline = baseJsonResponse.optString(MOVIE_TAGLINE, "");
             movieRuntime = baseJsonResponse.optInt(MOVIE_RUNTIME, 0);
+            movieBudget = baseJsonResponse.optInt(MOVIE_BUDGET,0);
+            movieRevenue = baseJsonResponse.optInt(MOVIE_REVENUE, 0);
             StringBuilder outputString = new StringBuilder();
             JSONArray genreFilmArray = baseJsonResponse.getJSONArray(MOVIE_GENRE);
             for (int g = 0; g < genreFilmArray.length(); g ++) {
                 JSONObject currentGenres = genreFilmArray.getJSONObject(g);
-                String tempGenre = currentGenres.getString(MOVIE_GENRE_NAME);
+                String tempGenre = currentGenres.optString(MOVIE_GENRE_NAME, "Unknown");
                 outputString.append(tempGenre);
                 outputString.append(" ");
             }
             movieGenre = outputString.toString();
+            List<String> languageList = new ArrayList<>();
+            JSONArray languageArray = baseJsonResponse.getJSONArray(MOVIE_LANGUAGES);
+            for (int l = 0; l < languageArray.length(); l++) {
+                JSONObject currentLanguage = languageArray.getJSONObject(l);
+                String spokenLanguage = currentLanguage.optString(MOVIE_LANGUAGE_NAME, "NA");
+                languageList.add(spokenLanguage);
+            }
             Film film = new Film();
             film.setMovieTagLine(movieTagline);
             film.setMovieGenre(movieGenre);
             film.setMovieRuntime(movieRuntime);
+            film.setMovieBudget(movieBudget);
+            film.setMovieRevenue(movieRevenue);
+            film.setMovieLanguage(languageList.get(0));
             movieExtraDetails.add(film);
 
         } catch (JSONException je) {
@@ -302,6 +317,7 @@ public class jsonUtils {
         if (url == null) {
             return jsonResponse;
         }
+        Log.e(TAG, "requestHttpsMovieVideos: Full request is: " + String.valueOf(url));
 
         HttpsURLConnection urlConnection = null;
         InputStream inputStream = null;
@@ -398,6 +414,7 @@ public class jsonUtils {
         if (url == null) {
             return jsonResponse;
         }
+        Log.e(TAG, "requestHttpsMovieReviews: Full request is: " + String.valueOf(url));
 
         HttpsURLConnection urlConnection = null;
         InputStream inputStream = null;
@@ -413,6 +430,7 @@ public class jsonUtils {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
             } else {
+
                 Log.e(TAG, "requestHttpsMovieReviews: Error code: "
                         + urlConnection.getResponseCode() );
             }

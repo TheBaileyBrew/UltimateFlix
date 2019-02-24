@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,11 +8,71 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".DetailsActivity">
+    <TextView
+        android:id="@+id/movie_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="end"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:paddingHorizontal="4dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="@dimen/margin_horizontal_16dp"
+        android:layout_marginEnd="@dimen/margin_horizontal_16dp"
+        android:elevation="@dimen/margin_bottom_22dp"
+        android:textSize="32sp"
+        android:textColor="@color/colorPrimaryText"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowColor="@color/colorPrimaryDark"
+        android:shadowRadius="6"
+        tools:text="This is the Movie Title example that rolls over onto two lines..."/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/margin_bottom_22dp"
+        android:gravity="end"
+        android:layout_marginStart="@dimen/margin_horizontal_16dp"
+        android:layout_marginEnd="@dimen/margin_horizontal_16dp"
+        app:layout_constraintTop_toBottomOf="@id/movie_title_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <TextView
+            android:id="@+id/release_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_standard_18sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowColor="@color/colorPrimaryText"
+            android:shadowRadius="6"
+            android:layout_marginEnd="@dimen/margin_horizontal_8dp"
+            android:text="Release Date: "/>
+        <TextView
+            android:id="@+id/release_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_standard_18sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:shadowDx="4"
+            android:shadowDy="4"
+            android:shadowColor="@color/colorPrimaryText"
+            android:shadowRadius="6"
+            tools:text="01/01/2012"/>
+    </LinearLayout>
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/appbar_height"
         android:fitsSystemWindows="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:theme="@style/Theme.MaterialComponents.Light.DarkActionBar">
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -20,8 +80,7 @@
             android:fitsSystemWindows="true"
             app:contentScrim="@color/colorWhiteFade"
             app:expandedTitleMarginEnd="@dimen/expand_title_margin"
-            app:expandedTitleMarginBottom="@dimen/margin_vertical_16dp"
-            app:expandedTitleMarginStart="@dimen/expand_title_margin_start"
+            app:expandedTitleMarginStart="40dp"
             app:expandedTitleTextAppearance="@style/ExpandedToolbar"
             app:collapsedTitleTextAppearance="@style/CollapsedToolbar"
             android:background="@android:color/white"
@@ -29,13 +88,13 @@
             <com.github.florent37.diagonallayout.DiagonalLayout
                 android:id="@+id/movie_backdrop_diagonal_holder"
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="380dp"
                 diagonal:layout_constraintTop_toTopOf="parent"
                 diagonal:layout_constraintStart_toStartOf="parent"
                 diagonal:layout_constraintEnd_toEndOf="parent"
                 android:background="@android:color/white"
                 android:elevation="15dp"
-                diagonal:diagonal_angle="10"
+                diagonal:diagonal_angle="45"
                 diagonal:diagonal_direction="left"
                 diagonal:diagonal_position="bottom">
                 <com.flaviofaria.kenburnsview.KenBurnsView
@@ -43,15 +102,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-
                     android:src="@drawable/flix_logo" />
+
             </com.github.florent37.diagonallayout.DiagonalLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="380dp"
+                android:elevation="14dp"
+                android:background="@drawable/scrim_bottom"/>
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?android:actionBarSize"
                 android:elevation="18dp"
-                app:titleTextColor="@color/colorPrimaryDark"
                 android:layout_gravity="end"
                 app:layout_collapseMode="none"/>
 
@@ -61,20 +124,22 @@
         android:id="@+id/credit_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_gravity="bottom"
-        app:layout_anchor="@id/app_toolbar"
-        app:layout_anchorGravity="bottom"/>
+        android:layout_marginTop="200dp"
+        android:elevation="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_scroll_holder_for_frame"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/credit_recycler"
+        android:layout_height="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_gravity="bottom"
-        app:layout_anchorGravity="bottom"
-        android:layout_marginBottom="?android:actionBarSize">
+        app:layout_constraintTop_toBottomOf="@id/credit_recycler"
+        app:layout_constraintBottom_toTopOf="@id/navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="2dp">
         <FrameLayout
             android:id="@+id/content_for_fragment"
             android:layout_width="match_parent"
@@ -88,12 +153,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:layout_anchorGravity="bottom|center_horizontal"
-        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:itemTextColor="@drawable/bottom_navigation_state_check_colors"
         app:itemIconTint="@drawable/bottom_navigation_state_check_colors"
         app:menu="@menu/navigation" />
 
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,7 +42,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.transition.Fade;
+import android.transition.Slide;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,12 +54,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.DASH_DETAILS;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.DASH_REVIEWS;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.DASH_TRAILERS;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.MOVIE_KEY;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.MOVIE_RELEASE_DATE;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.MOVIE_SYNOPSIS;
+import static com.thebaileybrew.ultimateflix.database.ConstantUtils.*;
 
 public class DetailsActivity extends AppCompatActivity {
     private static final String TAG = DetailsActivity.class.getSimpleName();
@@ -119,13 +117,19 @@ public class DetailsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorAccentFade), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setTitle(currentMovie.getMovieTitle());
-        getSupportActionBar().setSubtitle(currentMovie.getMovieLanguage());
+        getSupportActionBar().setTitle(null);
+        getSupportActionBar().setSubtitle(null);
         getSupportActionBar().getThemedContext();
 
         AppBarLayout appBarLayout = findViewById(R.id.app_toolbar);
         appBarLayout.setExpanded(true);
         appBarLayout.setOutlineProvider(null);
+
+        TextView movieTitle = findViewById(R.id.movie_title_text);
+        movieTitle.setText(currentMovie.getMovieTitle());
+
+        TextView releaseDate = findViewById(R.id.release_detail);
+        releaseDate.setText(formatDate(currentMovie.getMovieReleaseDate()));
     }
 
 
@@ -161,20 +165,26 @@ public class DetailsActivity extends AppCompatActivity {
     private void loadFragment(String fragmentName) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
+        //transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
         Bundle bundle = new Bundle();
         bundle.putInt(MOVIE_KEY, movieID);
         bundle.putString(MOVIE_SYNOPSIS, currentMovie.getMovieOverview());
         bundle.putString(MOVIE_RELEASE_DATE, currentMovie.getMovieReleaseDate());
+        bundle.putDouble(MOVIE_AVERAGE, currentMovie.getMovieVoteAverage());
+        bundle.putInt(MOVIE_VOTE_COUNT, currentMovie.getMovieVoteCount());
 
         switch (fragmentName) {
             case DASH_DETAILS:
                 if(loadedFragment == null) {
                     loadedFragment = new DashDetailsFragment();
+                    loadedFragment.setEnterTransition(new Slide(Gravity.END));
                     loadedFragment.setArguments(bundle);
                     transaction.add(R.id.content_for_fragment, loadedFragment).commit();
                 } else {
                     if (!(fm.findFragmentById(R.id.content_for_fragment) instanceof DashDetailsFragment)) {
                         loadedFragment = new DashDetailsFragment();
+
+                        loadedFragment.setEnterTransition(new Slide(Gravity.END));
                         loadedFragment.setArguments(bundle);
                         transaction.replace(R.id.content_for_fragment, loadedFragment);
                         transaction.addToBackStack(null);
@@ -185,11 +195,13 @@ public class DetailsActivity extends AppCompatActivity {
             case DASH_REVIEWS:
                 if(loadedFragment == null) {
                     loadedFragment = new DashReviewsFragment();
+                    loadedFragment.setEnterTransition(new Slide(Gravity.END));
                     loadedFragment.setArguments(bundle);
                     transaction.add(R.id.content_for_fragment, loadedFragment).commit();
                 } else {
                     if (!(fm.findFragmentById(R.id.content_for_fragment) instanceof DashReviewsFragment)) {
                         loadedFragment = new DashReviewsFragment();
+                        loadedFragment.setEnterTransition(new Slide(Gravity.END));
                         loadedFragment.setArguments(bundle);
                         transaction.replace(R.id.content_for_fragment, loadedFragment);
                         transaction.addToBackStack(null);
@@ -200,11 +212,13 @@ public class DetailsActivity extends AppCompatActivity {
             case DASH_TRAILERS:
                 if(loadedFragment == null) {
                     loadedFragment = new DashTrailersFragment();
+                    loadedFragment.setEnterTransition(new Slide(Gravity.END));
                     loadedFragment.setArguments(bundle);
                     transaction.add(R.id.content_for_fragment, loadedFragment).commit();
                 } else {
                     if (!(fm.findFragmentById(R.id.content_for_fragment) instanceof DashTrailersFragment)) {
                         loadedFragment = new DashTrailersFragment();
+                        loadedFragment.setEnterTransition(new Slide(Gravity.END));
                         loadedFragment.setArguments(bundle);
                         transaction.replace(R.id.content_for_fragment, loadedFragment);
                         transaction.addToBackStack(null);
@@ -222,7 +236,13 @@ public class DetailsActivity extends AppCompatActivity {
         loadFragment(DASH_DETAILS);
     }
 
-    private void initCreditRecycler() {}
+    private String formatDate(String movieReleaseDate) {
+        String[] datestamps = movieReleaseDate.split("-");
+        String dateYear = datestamps[0];
+        String dateMonth = datestamps[1];
+        String dateDay = datestamps[2];
+        return dateMonth + getString(R.string.linebreak) + dateDay + getString(R.string.linebreak) + dateYear;
+    }
 
     public int getMovieID() {
         return movieID;

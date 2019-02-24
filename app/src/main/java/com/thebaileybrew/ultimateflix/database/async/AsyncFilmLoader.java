@@ -12,6 +12,8 @@ import com.thebaileybrew.ultimateflix.utils.UrlUtils;
 import com.thebaileybrew.ultimateflix.utils.jsonUtils;
 
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,11 +25,17 @@ public class AsyncFilmLoader extends AsyncTask<String, Void, List<Film>> {
     private final TextView movieTag;
     private final TextView movieGenre;
     private final TextView movieRuntime;
+    private final TextView movieLanguage;
+    private final TextView movieBudget;
+    private final TextView movieRevenue;
 
-    public AsyncFilmLoader(TextView movieTag, TextView movieGenre, TextView movieRuntime) {
+    public AsyncFilmLoader(TextView movieTag, TextView movieGenre, TextView movieRuntime, TextView movieLanguage, TextView movieRevenue, TextView movieBudget) {
         this.movieTag = movieTag;
         this.movieGenre = movieGenre;
         this.movieRuntime = movieRuntime;
+        this.movieLanguage = movieLanguage;
+        this.movieRevenue = movieRevenue;
+        this.movieBudget = movieBudget;
     }
 
     @Override
@@ -60,9 +68,17 @@ public class AsyncFilmLoader extends AsyncTask<String, Void, List<Film>> {
             } else {
                 movieRuntime.setText(convertTime(currentFilm.getMovieRuntime()));
             }
+            movieLanguage.setText(currentFilm.getMovieLanguage());
+            movieBudget.setText(convertDollars(currentFilm.getMovieBudget()));
+            movieRevenue.setText(convertDollars(currentFilm.getMovieRevenue()));
         }
 
         super.onPostExecute(film);
+    }
+
+    private String convertDollars(int movieCurrency) {
+        NumberFormat formatter = new DecimalFormat("#,###");
+        return "$ " + formatter.format((double) movieCurrency);
     }
 
     private String convertTime(int runTime) {

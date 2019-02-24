@@ -19,30 +19,13 @@ public class AsyncMovieLoader extends AsyncTask<String, Void, List<Movie>> {
 
     @Override
     protected List<Movie> doInBackground(String... strings) {
-        if (strings.length < 3 || strings[0] == null) {
+        if (strings.length < 1 || strings[0] == null) {
             return null;
         }
-        String sortingOrder = strings[0];
-        Log.e(ASYNCTAG, "doInBackground: sortOrder" + sortingOrder );
-        if (sortingOrder.equals("favorite")) {
-            //TODO: Get films that have a DB value of FAVORITE
-
-        } else if (sortingOrder.equals("watchlist")) {
-            //TODO: Get films that have a DB value of WATCHLIST
-
-        }
-        String languageFilter = strings[1];
-        Log.e(ASYNCTAG, "doInBackground: language" + languageFilter);
-        String filterYear = strings[2];
-        Log.e(ASYNCTAG, "doInBackground: year" + filterYear);
-        String searchQuery = strings[3];
-        Log.e(ASYNCTAG, "doInBackground: searching" + searchQuery);
+        String pageNumber = strings[0];
         URL moviesRequestUrl = UrlUtils.buildMovieUrl(
                 BuildConfig.API_KEY,
-                languageFilter,
-                sortingOrder,
-                filterYear,
-                searchQuery);
+                pageNumber);
         try {
             String jsonMoviesResponse = jsonUtils.makeHttpsRequest(moviesRequestUrl);
 

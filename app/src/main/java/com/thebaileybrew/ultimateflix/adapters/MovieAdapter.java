@@ -69,8 +69,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     }
 
     public void setMovieCollection(List<Movie> moviesReturn) {
+        int initSize = movieCollection.size();
+
         movieCollection = moviesReturn;
         notifyDataSetChanged();
+    }
+
+    public String getLastItemId() {
+        return String.valueOf(movieCollection.get(movieCollection.size() - 1).getMovieID());
     }
 
     public List<Movie> getMovieCollection() {

@@ -21,21 +21,19 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.database.DataSnapshot;
 import com.thebaileybrew.ultimateflix.adapters.MovieAdapter;
 import com.thebaileybrew.ultimateflix.database.MovieSnapshotViewModel;
-import com.thebaileybrew.ultimateflix.database.loaders.MovieLoader;
+import com.thebaileybrew.ultimateflix.listeners.EndlessRecyclerOnScrollListener;
 import com.thebaileybrew.ultimateflix.models.Movie;
 import com.thebaileybrew.ultimateflix.ui.MoviePreferences;
 import com.thebaileybrew.ultimateflix.ui.UltimateFlix;
 import com.thebaileybrew.ultimateflix.utils.displayMetricsUtils;
 import com.thebaileybrew.ultimateflix.utils.networkUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ExecutionException;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -55,6 +53,7 @@ public class MovieSelectActivity extends AppCompatActivity implements MovieAdapt
 
     private MovieAdapter mAdapter;
     private SharedPreferences sharedPrefs;
+    private int currentPage = 1;
 
 
     private String queryResult = "";
@@ -133,6 +132,8 @@ public class MovieSelectActivity extends AppCompatActivity implements MovieAdapt
                     noNetworkLayout.setVisibility(View.INVISIBLE);
                     mRecyclerView.setVisibility(VISIBLE);
                     Log.e(TAG, "onRefresh: Swiped");
+                    currentPage++;
+                    UltimateFlix.getContext().updateFirebase(String.valueOf(currentPage));
                     populateUI();
                 } else {
                     //Show no connection layout

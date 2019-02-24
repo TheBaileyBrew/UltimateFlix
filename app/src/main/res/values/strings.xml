@@ -82,4 +82,8 @@
     <string name="check_network_credits_display">There was a problem getting actor credits. Please check your network settings</string>
     <string name="search">Search</string>
     <string name="search_movies">Search movies..</string>
+    <string name="favorite_no">NO</string>
+    <string name="watchlist_no">NO</string>
+    <string name="favorite_yes">YES</string>
+    <string name="watchlist_yes">YES</string>
 </resources>

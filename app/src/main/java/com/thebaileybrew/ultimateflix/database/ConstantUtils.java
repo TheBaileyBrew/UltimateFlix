@@ -21,11 +21,16 @@ public class ConstantUtils {
     public static final String MOVIE_BACKDROP = "backdrop_path";
     public static final String MOVIE_SYNOPSIS = "overview";
     public static final String MOVIE_RELEASE_DATE = "release_date";
+    public static final String MOVIE_FAVORITE = "favorite";
 
     public static final String MOVIE_TAGLINE = "tagline";
     public static final String MOVIE_GENRE = "genres";
     public static final String MOVIE_GENRE_NAME = "name";
     public static final String MOVIE_RUNTIME = "runtime";
+    public static final String MOVIE_BUDGET = "budget";
+    public static final String MOVIE_REVENUE = "revenue";
+    public static final String MOVIE_LANGUAGES = "spoken_languages";
+    public static final String MOVIE_LANGUAGE_NAME = "name";
 
     public static final String MOVIE_CAST = "cast";
     public static final String CREDIT_CHARACTER = "character";

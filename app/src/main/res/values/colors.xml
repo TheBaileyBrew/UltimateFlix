@@ -14,6 +14,9 @@
     <color name="colorToolbarExpanded">#fcfcfc</color>
     <color name="colorToolbarCollapsed">#000000</color>
 
+    <color name="translucent_scrim_bottom">#7A000000</color>
+    <color name="translucent_scrim_bottom_center">#0D000000</color>
+
     <!-- Color Scheme for Rating Progress-->
     <!-- HIGH -->
     <color name="colorGoodFade">#9025cc00</color>

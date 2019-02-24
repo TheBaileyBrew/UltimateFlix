@@ -7,6 +7,10 @@ public class Film {
     private int movieRuntime;
     private String movieGenre;
 
+    private int movieBudget;
+    private int movieRevenue;
+    private String movieLanguage;
+
     public String getMovieTagLine() {
         return movieTagLine;
     }
@@ -29,6 +33,30 @@ public class Film {
 
     public void setMovieGenre(String movieGenre) {
         this.movieGenre = movieGenre;
+    }
+
+    public int getMovieBudget() {
+        return movieBudget;
+    }
+
+    public void setMovieBudget(int movieBudget) {
+        this.movieBudget = movieBudget;
+    }
+
+    public int getMovieRevenue() {
+        return movieRevenue;
+    }
+
+    public void setMovieRevenue(int movieRevenue) {
+        this.movieRevenue = movieRevenue;
+    }
+
+    public String getMovieLanguage() {
+        return movieLanguage;
+    }
+
+    public void setMovieLanguage(String movieLanguage) {
+        this.movieLanguage = movieLanguage;
     }
 }
 
