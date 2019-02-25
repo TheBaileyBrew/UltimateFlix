@@ -201,7 +201,9 @@ public class jsonUtils {
                 JSONObject currentGenres = genreFilmArray.getJSONObject(g);
                 String tempGenre = currentGenres.optString(MOVIE_GENRE_NAME, "Unknown");
                 outputString.append(tempGenre);
-                outputString.append(" ");
+                if (g != genreFilmArray.length() - 1 && g != genreFilmArray.length()) {
+                    outputString.append(" / ");
+                }
             }
             movieGenre = outputString.toString();
             List<String> languageList = new ArrayList<>();

@@ -4,11 +4,12 @@
     package="com.thebaileybrew.ultimateflix">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
-        android:allowBackup="true"
         android:name=".ui.UltimateFlix"
+        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -26,18 +27,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity"
+        <activity
+            android:name=".DetailsActivity"
             android:label="Flix Details">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MovieSelectActivity"/>
+                android:value=".MovieSelectActivity" />
         </activity>
-        <activity android:name=".ui.MoviePreferences"
-            android:label="Flix Preferences">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MovieSelectActivity"/>
-        </activity>
+
+        <receiver android:name=".database.widget.UltimateFlixWidget" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider"
+                android:resource="@xml/widget_info" />
+        </receiver>
+
     </application>
 
 </manifest>

@@ -116,7 +116,7 @@ public class DetailsActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorAccentFade), PorterDuff.Mode.SRC_ATOP);
+        mToolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setSubtitle(null);
         getSupportActionBar().getThemedContext();

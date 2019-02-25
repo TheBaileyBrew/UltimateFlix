@@ -9,6 +9,7 @@ public class ConstantUtils {
 
     //Key Constants
     public final static String MOVIE_KEY = "parcel_movie";
+    public final static String CURRENT_FILM_ID = "firebasePK";
 
     //Constants for JSON Querying
     public static final String MOVIE_ID = "id";
@@ -51,4 +52,9 @@ public class ConstantUtils {
     public static final String REVIEW_LINK = "url";
 
     public static final String TIME_FORMAT = "%02d:%02d";
+
+    public static final String WIDGET_MOVIE_ID = "widget_id";
+    public static final String WIDGET_MOVIE_TITLE = "widget_title";
+    public static final String WIDGET_MOVIE_RELEASE = "widget_release";
+    public static final String WIDGET_MOVIE_POSTER = "widget_poster";
 }

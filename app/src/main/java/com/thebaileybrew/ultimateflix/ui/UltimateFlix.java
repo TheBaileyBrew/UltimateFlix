@@ -13,9 +13,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.thebaileybrew.ultimateflix.R;
-import com.thebaileybrew.ultimateflix.database.async.AsyncCreditsLoader;
 import com.thebaileybrew.ultimateflix.database.async.AsyncMovieLoader;
 import com.thebaileybrew.ultimateflix.models.Movie;
 
@@ -23,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import androidx.annotation.NonNull;
+import static com.thebaileybrew.ultimateflix.database.ConstantUtils.CURRENT_FILM_ID;
 
 public class UltimateFlix extends Application {
     private static final String TAG = UltimateFlix.class.getSimpleName();
@@ -38,6 +35,9 @@ public class UltimateFlix extends Application {
     private FirebaseAuth mAuthUser;
 
     private String currentPage = "1";
+    private int primaryKey = 0;
+
+    private SharedPreferences sharedPrefs;
 
 
 
@@ -46,6 +46,8 @@ public class UltimateFlix extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(UltimateFlix.getContext());
+        primaryKey = sharedPrefs.getInt(CURRENT_FILM_ID,0);
         updateAsyncParameters(currentPage);
 
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -57,10 +59,11 @@ public class UltimateFlix extends Application {
     }
 
     public void loadFirebaseDatabase() {
-        Log.e(TAG, "UltimateFlix: size: " + allMovies.size() );
         for (int m = 0; m < allMovies.size(); m++) {
             final Movie addMovie = allMovies.get(m);
-            mMoviesReference.setValue(addMovie);
+            primaryKey++;
+            sharedPrefs.edit().putInt(CURRENT_FILM_ID, primaryKey).apply();
+            mMoviesReference.push().setValue(addMovie);
         }
     }
 
@@ -77,11 +80,13 @@ public class UltimateFlix extends Application {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 
     public void updateFirebase(String currentPage) {
         this.currentPage = currentPage;
         UltimateFlix.updateAsyncParameters(this.currentPage);
+        loadFirebaseDatabase();
     }
 
 

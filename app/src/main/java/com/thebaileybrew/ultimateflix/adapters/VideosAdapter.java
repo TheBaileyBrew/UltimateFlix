@@ -44,7 +44,8 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.ViewHolder
         final Videos currentVideo = videoCollection.get(position);
         String videoImagePath = UrlUtils.buildYoutubeImageUrl(currentVideo.getVideoKey());
         holder.videoTitle.setText(currentVideo.getVideoName());
-        holder.videoSize.setText(currentVideo.getVideoSize());
+        String videoSize = "[ " + currentVideo.getVideoSize() + " ]";
+        holder.videoSize.setText(videoSize);
         holder.videoType.setText(currentVideo.getVideoType());
         Picasso.get()
                 .load(videoImagePath)

@@ -28,9 +28,12 @@ public class MovieSnapshotViewModel extends ViewModel {
     private final LiveData<List<Movie>> movieLiveData = Transformations.map(liveDataQuery, new Deserializer());
     private final LiveData<Movie> singleMovieLiveData = Transformations.map(liveDataInputQuery, new MovieDeserializer());
 
+    /*
     public static void loadQuery(Query inputQuery) {
         liveDataInputQuery = new FirebaseLiveDataQuery(inputQuery);
     }
+    */
+
 
     private class Deserializer implements Function<DataSnapshot, List<Movie>> {
 

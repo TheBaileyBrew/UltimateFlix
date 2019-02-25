@@ -28,7 +28,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     public interface MovieAdapterClickHandler {
         void onClick(View view, Movie movie);
-        void onLongClick(View view, Movie movie, ImageView hiddenStar);
+        void onLongClick(View view, int movieID, String movieTitle, String movieRelease, String moviePath);
     }
 
     //Create the recycler
@@ -86,14 +86,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         final ImageView moviePoster;
-        final ImageView hiddenViewStar;
 
         private ViewHolder(View newView) {
             super(newView);
             moviePoster = newView.findViewById(R.id.movie_cardview_poster);
-            hiddenViewStar = newView.findViewById(R.id.hidden_star);
-            newView.setOnClickListener(this);
-            newView.setOnLongClickListener(this);
+            moviePoster.setOnClickListener(this);
+            moviePoster.setOnLongClickListener(this);
         }
 
         @Override
@@ -102,11 +100,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             adapterClickHandler.onClick(v, currentMovie);
         }
 
-
         @Override
         public boolean onLongClick(View v) {
             Movie currentMovie = movieCollection.get(getAdapterPosition());
-            adapterClickHandler.onLongClick(v, currentMovie, hiddenViewStar);
+            adapterClickHandler.onLongClick(v, currentMovie.getMovieID(), currentMovie.getMovieTitle(), currentMovie.getMovieReleaseDate(), currentMovie.getMoviePosterPath());
             return true;
         }
     }

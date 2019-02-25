@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    android:background="@color/colorPrimaryFade"
     tools:context=".DetailsActivity">
     <TextView
         android:id="@+id/movie_title_text"
@@ -46,10 +47,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_standard_18sp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimaryText"
             android:shadowDx="4"
             android:shadowDy="4"
-            android:shadowColor="@color/colorPrimaryText"
+            android:shadowColor="@color/colorPrimaryDark"
             android:shadowRadius="6"
             android:layout_marginEnd="@dimen/margin_horizontal_8dp"
             android:text="Release Date: "/>
@@ -58,10 +59,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_standard_18sp"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimaryText"
             android:shadowDx="4"
             android:shadowDy="4"
-            android:shadowColor="@color/colorPrimaryText"
+            android:shadowColor="@color/colorPrimaryDark"
             android:shadowRadius="6"
             tools:text="01/01/2012"/>
     </LinearLayout>
@@ -109,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="380dp"
                 android:elevation="14dp"
-                android:background="@drawable/scrim_bottom"/>
+                android:background="@color/colorPrimaryFade"/>
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"

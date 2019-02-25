@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.thebaileybrew.ultimateflix"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -41,7 +41,6 @@ dependencies {
     //Firebase User Authentication
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
-
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'

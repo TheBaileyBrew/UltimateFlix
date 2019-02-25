@@ -86,4 +86,5 @@
     <string name="watchlist_no">NO</string>
     <string name="favorite_yes">YES</string>
     <string name="watchlist_yes">YES</string>
+    <string name="refresh">Refresh</string>
 </resources>
