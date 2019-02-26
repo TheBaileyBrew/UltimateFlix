@@ -31,7 +31,6 @@ import static com.thebaileybrew.ultimateflix.database.ConstantUtils.MOVIE_KEY;
 public class DashTrailersFragment extends Fragment {
     private static final String TAG = DashTrailersFragment.class.getSimpleName();
 
-    private RecyclerView trailerRecycler;
     private List<Videos> videos = new ArrayList<>();
     private int movieID;
 
@@ -48,7 +47,7 @@ public class DashTrailersFragment extends Fragment {
         //TODO: Setup view objects
         ConstraintLayout noDataView = rootView.findViewById(R.id.no_trailers_constraint_layout);
         //DO STUFF HERE
-        trailerRecycler = rootView.findViewById(R.id.trailer_recycler);
+        RecyclerView trailerRecycler = rootView.findViewById(R.id.trailer_recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UltimateFlix.getContext());
         trailerRecycler.setLayoutManager(linearLayoutManager);
         VideosAdapter videosAdapter = new VideosAdapter(UltimateFlix.getContext(), videos, new VideosAdapter.VideoClickHandler() {
@@ -70,7 +69,7 @@ public class DashTrailersFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
-            Log.e(TAG, "onCreateView: error", e);;
+            Log.e(TAG, "onCreateView: error", e);
         }
         if (videos.isEmpty()) {
             Log.e(TAG, "onCreateView: vids empty");

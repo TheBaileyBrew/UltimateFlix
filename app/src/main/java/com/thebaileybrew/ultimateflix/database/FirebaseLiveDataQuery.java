@@ -10,7 +10,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import androidx.lifecycle.LiveData;
 
-public class FirebaseLiveDataQuery extends LiveData<DataSnapshot> {
+class FirebaseLiveDataQuery extends LiveData<DataSnapshot> {
     private final static String LOG_TAG = "FirebaseLiveDataQuery";
 
     private final Query query;

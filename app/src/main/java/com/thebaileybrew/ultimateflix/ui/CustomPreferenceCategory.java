@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-public class CustomPreferenceCategory extends PreferenceCategory {
+class CustomPreferenceCategory extends PreferenceCategory {
 
     public CustomPreferenceCategory(Context context) {
         super(context);

@@ -10,7 +10,7 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        def apikey = project.hasProperty('apikey') ? apikey : (System.getenv('API_KEY') ?: "\"bc9386edce4886744345020389505c78\"")
+        def apikey = project.hasProperty('apikey') ? apikey : (System.getenv('API_KEY') ?: "\"[API KEY HERE]\"")
         buildConfigField "String", "API_KEY", apikey
     }
     buildTypes {
@@ -43,8 +43,8 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
 
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
+    androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
 
 }
 

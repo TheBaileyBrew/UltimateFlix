@@ -1,15 +1,10 @@
 package com.thebaileybrew.ultimateflix.utils;
 
 import android.net.Uri;
-import android.text.TextUtils;
 import android.util.Log;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
 
 public class UrlUtils {
     private static final String TAG = UrlUtils.class.getSimpleName();

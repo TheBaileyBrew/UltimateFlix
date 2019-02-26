@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import com.thebaileybrew.ultimateflix.BuildConfig;
 import com.thebaileybrew.ultimateflix.R;
-import com.thebaileybrew.ultimateflix.models.Credit;
 import com.thebaileybrew.ultimateflix.models.Film;
 import com.thebaileybrew.ultimateflix.utils.UrlUtils;
 import com.thebaileybrew.ultimateflix.utils.jsonUtils;

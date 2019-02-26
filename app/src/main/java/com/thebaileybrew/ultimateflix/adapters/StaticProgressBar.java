@@ -164,11 +164,11 @@ public class StaticProgressBar extends View {
         this.invalidate();
     }
 
-    public float getProgress() {
+    private float getProgress() {
         return progress;
     }
 
-    public void setProgress(float progress) {
+    private void setProgress(float progress) {
         this.progress = Float.valueOf(new DecimalFormat("#.##").format(progress));
 
         if (this.progress > getMax()) {

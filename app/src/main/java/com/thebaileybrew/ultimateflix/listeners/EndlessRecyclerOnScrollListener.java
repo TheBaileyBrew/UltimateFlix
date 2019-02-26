@@ -1,11 +1,5 @@
 package com.thebaileybrew.ultimateflix.listeners;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,10 +16,8 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
     private int previousTotalItemCount = 0;
     // True if we are still waiting for the last set of data to load.
     private boolean loading = true;
-    // Sets the starting page index
-    private int startingPageIndex = 1;
 
-    RecyclerView.LayoutManager mLayoutManager;
+    private final RecyclerView.LayoutManager mLayoutManager;
 
     public EndlessRecyclerOnScrollListener(LinearLayoutManager layoutManager) {
         this.mLayoutManager = layoutManager;
@@ -41,7 +33,7 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
         visibleThreshold = visibleThreshold * layoutManager.getSpanCount();
     }
 
-    public int getLastVisibleItem(int[] lastVisibleItemPositions) {
+    private int getLastVisibleItem(int[] lastVisibleItemPositions) {
         int maxSize = 0;
         for (int i = 0; i < lastVisibleItemPositions.length; i++) {
             if (i == 0) {
@@ -76,7 +68,9 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
         // If the total item count is zero and the previous isn't, assume the
         // list is invalidated and should be reset back to initial state
         if (totalItemCount < previousTotalItemCount) {
-            this.currentPage = this.startingPageIndex;
+            // Sets the starting page index
+            int startingPageIndex = 1;
+            this.currentPage = startingPageIndex;
             this.previousTotalItemCount = totalItemCount;
             if (totalItemCount == 0) {
                 this.loading = true;
@@ -106,6 +100,6 @@ public abstract class EndlessRecyclerOnScrollListener extends RecyclerView.OnScr
     }
 
     // Defines the process for actually loading more data based on page
-    public abstract boolean onLoadMore(int page, int totalItemsCount);
+    protected abstract void onLoadMore(int page, int totalItemsCount);
 
 }

@@ -72,7 +72,6 @@
         tools:text="@string/lorem_ipsum"/>
 
     <LinearLayout
-        android:id="@+id/card_view_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -94,7 +93,6 @@
             android:orientation="vertical"
             android:padding="@dimen/half_margin_vertical_4dp">
             <TextView
-                android:id="@+id/runtime_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/half_margin_vertical_4dp"
@@ -106,7 +104,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/half_margin_vertical_4dp" />
             <TextView
-                android:id="@+id/language_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryDark"
@@ -135,7 +132,6 @@
                 android:orientation="vertical"
                 android:padding="@dimen/half_margin_vertical_4dp">
                 <TextView
-                    android:id="@+id/budget_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/half_margin_vertical_4dp"
@@ -147,7 +143,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/half_margin_vertical_4dp" />
                 <TextView
-                    android:id="@+id/revenue_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/half_margin_vertical_4dp"

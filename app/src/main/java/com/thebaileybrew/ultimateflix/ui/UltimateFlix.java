@@ -3,14 +3,8 @@ package com.thebaileybrew.ultimateflix.ui;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.thebaileybrew.ultimateflix.database.async.AsyncMovieLoader;
@@ -27,9 +21,7 @@ public class UltimateFlix extends Application {
 
     private static UltimateFlix mContext;
     private static List<Movie> allMovies = new ArrayList<>();
-    private static AsyncMovieLoader asyncLoader;
 
-    private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference mMoviesReference;
 
     private FirebaseAuth mAuthUser;
@@ -50,7 +42,7 @@ public class UltimateFlix extends Application {
         primaryKey = sharedPrefs.getInt(CURRENT_FILM_ID,0);
         updateAsyncParameters(currentPage);
 
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         mMoviesReference = mFirebaseDatabase.getReference().child("movies");
         loadFirebaseDatabase();
 
@@ -58,7 +50,7 @@ public class UltimateFlix extends Application {
 
     }
 
-    public void loadFirebaseDatabase() {
+    private void loadFirebaseDatabase() {
         for (int m = 0; m < allMovies.size(); m++) {
             final Movie addMovie = allMovies.get(m);
             primaryKey++;
@@ -71,8 +63,8 @@ public class UltimateFlix extends Application {
         return mContext;
     }
 
-    public static void updateAsyncParameters(String pageNumber) {
-        asyncLoader = new AsyncMovieLoader();
+    private static void updateAsyncParameters(String pageNumber) {
+        AsyncMovieLoader asyncLoader = new AsyncMovieLoader();
         try {
             allMovies = asyncLoader.execute(pageNumber).get();
         } catch (ExecutionException e) {

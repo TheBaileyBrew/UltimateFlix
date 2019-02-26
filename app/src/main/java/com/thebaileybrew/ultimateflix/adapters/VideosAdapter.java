@@ -21,7 +21,7 @@ public class VideosAdapter extends RecyclerView.Adapter<VideosAdapter.ViewHolder
     private final LayoutInflater layoutInflater;
     private List<Videos> videoCollection;
     private RecyclerView videoRecycler;
-    private VideoClickHandler clickHandler;
+    private final VideoClickHandler clickHandler;
 
     public interface VideoClickHandler {
         void onClick(View view, Videos video);

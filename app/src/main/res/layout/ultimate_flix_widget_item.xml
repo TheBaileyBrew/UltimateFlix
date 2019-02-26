@@ -7,18 +7,19 @@
     <ImageView
         android:id="@+id/widget_image_view"
         android:layout_width="100dp"
-        android:layout_height="125dp" />
+        android:layout_height="120dp"
+        android:contentDescription="TODO" />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="@dimen/margin_horizontal_8dp">
+        android:layout_margin="@dimen/half_margin_vertical_4dp">
         <TextView
             android:id="@+id/widget_movie_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_start_12dp"
-            android:padding="@dimen/margin_horizontal_8dp"
+            android:layout_marginBottom="@dimen/half_margin_vertical_4dp"
+            android:padding="2dp"
             tools:text="This is the movie title"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
         <TextView
@@ -26,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Release Date"
-            android:padding="@dimen/margin_horizontal_8dp"
+            android:padding="2dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
     </LinearLayout>
 

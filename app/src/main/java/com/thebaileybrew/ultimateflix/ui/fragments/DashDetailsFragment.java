@@ -9,11 +9,9 @@ import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 
-import com.thebaileybrew.ultimateflix.DetailsActivity;
 import com.thebaileybrew.ultimateflix.R;
 import com.thebaileybrew.ultimateflix.adapters.StaticProgressBar;
 import com.thebaileybrew.ultimateflix.database.async.AsyncFilmLoader;
-import com.thebaileybrew.ultimateflix.models.Movie;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

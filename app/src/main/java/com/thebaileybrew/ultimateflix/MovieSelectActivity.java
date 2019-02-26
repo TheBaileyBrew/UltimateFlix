@@ -1,6 +1,5 @@
 package com.thebaileybrew.ultimateflix;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,12 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.thebaileybrew.ultimateflix.adapters.MovieAdapter;
 import com.thebaileybrew.ultimateflix.database.MovieSnapshotViewModel;
 import com.thebaileybrew.ultimateflix.listeners.EndlessRecyclerOnScrollListener;
@@ -32,9 +28,7 @@ import com.thebaileybrew.ultimateflix.utils.networkUtils;
 import java.util.List;
 import java.util.Random;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -44,17 +38,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import static android.view.View.VISIBLE;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.CURRENT_FILM_ID;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.MOVIE_KEY;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.WIDGET_MOVIE_ID;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.WIDGET_MOVIE_POSTER;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.WIDGET_MOVIE_RELEASE;
-import static com.thebaileybrew.ultimateflix.database.ConstantUtils.WIDGET_MOVIE_TITLE;
+import static com.thebaileybrew.ultimateflix.database.ConstantUtils.*;
 
 public class MovieSelectActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterClickHandler {
     private static final String TAG = MovieSelectActivity.class.getSimpleName();
-
-    private FirebaseAnalytics mFirebaseAnalytics;
 
     private MovieAdapter mAdapter;
     private SharedPreferences sharedPrefs;
@@ -62,11 +49,9 @@ public class MovieSelectActivity extends AppCompatActivity implements MovieAdapt
 
     private RecyclerView mRecyclerView;
     private ConstraintLayout noNetworkLayout;
-    private GridLayoutManager gridLayoutManager;
     private SwipeRefreshLayout swipeRefresh;
 
     private LinearLayout searchLayout;
-    private TextInputEditText searchEntry;
     private boolean searchVisible = false;
 
     private Animation animFadeIn, animFadeOut;
@@ -75,7 +60,7 @@ public class MovieSelectActivity extends AppCompatActivity implements MovieAdapt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selection);
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, String.valueOf(currentPage));
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
@@ -93,7 +78,7 @@ public class MovieSelectActivity extends AppCompatActivity implements MovieAdapt
 
         //Define Grid size/scale factor
         int columnIndex = displayMetricsUtils.calculateGridColumn(this);
-        gridLayoutManager = new GridLayoutManager(this, columnIndex);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, columnIndex);
 
         //Check for network
         if (networkUtils.checkNetwork(this)) {
@@ -114,14 +99,13 @@ public class MovieSelectActivity extends AppCompatActivity implements MovieAdapt
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new EndlessRecyclerOnScrollListener(gridLayoutManager) {
             @Override
-            public boolean onLoadMore(int page, int totalItemsCount) {
+            public void onLoadMore(int page, int totalItemsCount) {
                 Log.e(TAG, "onLoadMore: called " + currentPage);
                 currentPage++;
                 int currentSize = mAdapter.getItemCount();
                 UltimateFlix.getContext().updateFirebase(String.valueOf(currentPage));
                 Log.e(TAG, "onLoadMore: called " + currentPage + " - " + currentSize );
                 mAdapter.notifyDataSetChanged();
-                return true;
             }
         });
     }
@@ -176,7 +160,7 @@ public class MovieSelectActivity extends AppCompatActivity implements MovieAdapt
         swipeRefresh = findViewById(R.id.swipe_refresh);
         searchLayout = findViewById(R.id.search_layout);
         TextInputLayout searchEntryLayout = findViewById(R.id.search_layout_entry);
-        searchEntry = findViewById(R.id.search_entry);
+        TextInputEditText searchEntry = findViewById(R.id.search_entry);
     }
 
     //Collect SharedPrefs from Activity
@@ -264,17 +248,26 @@ public class MovieSelectActivity extends AppCompatActivity implements MovieAdapt
         Intent openDisplayDetails = new Intent(MovieSelectActivity.this, DetailsActivity.class);
         //Put Parcel Extra
         openDisplayDetails.putExtra(MOVIE_KEY, movie);
+
         Log.e(TAG, "onClick: clicked movie is: " + movie.getMovieTitle() + " - " + movie.getMovieID() );
         startActivity(openDisplayDetails);
     }
 
     @Override
-    public void onLongClick(View view, int movieID, String movieTitle, String movieRelease, String moviePath) {
-        sharedPrefs.edit().putInt(WIDGET_MOVIE_ID, movieID).apply();
-        sharedPrefs.edit().putString(WIDGET_MOVIE_TITLE, movieTitle).apply();
-        sharedPrefs.edit().putString(WIDGET_MOVIE_RELEASE, movieRelease).apply();
-        sharedPrefs.edit().putString(WIDGET_MOVIE_POSTER, moviePath).apply();
-        Toast.makeText(this, "Movie: " + movieTitle + " added to Widget Data", Toast.LENGTH_SHORT).show();
+    public void onLongClick(View view, Movie movie) {
+        sharedPrefs.edit().putInt(WIDGET_MOVIE_ID, movie.getMovieID()).apply();
+        sharedPrefs.edit().putInt(WIDGET_MOVIE_VOTE_COUNT, movie.getMovieVoteCount()).apply();
+        sharedPrefs.edit().putString(WIDGET_MOVIE_VOTE_AVG, String.valueOf(movie.getMovieVoteAverage())).apply();
+        sharedPrefs.edit().putString(WIDGET_MOVIE_TITLE, movie.getMovieTitle()).apply();
+        sharedPrefs.edit().putString(WIDGET_MOVIE_POPULARITY, String.valueOf(movie.getMoviePopularity())).apply();
+        sharedPrefs.edit().putString(WIDGET_MOVIE_LANGUAGE, movie.getMovieLanguage()).apply();
+        sharedPrefs.edit().putString(WIDGET_MOVIE_POSTER, movie.getMoviePosterPath()).apply();
+        sharedPrefs.edit().putString(WIDGET_MOVIE_BACKDROP, movie.getMovieBackdrop()).apply();
+        sharedPrefs.edit().putString(WIDGET_MOVIE_OVERVIEW, movie.getMovieOverview()).apply();
+        sharedPrefs.edit().putString(WIDGET_MOVIE_RELEASE, movie.getMovieReleaseDate()).apply();
+        sharedPrefs.edit().putInt(WIDGET_MOVIE_FAVORITE, movie.getMovieFavorite()).apply();
+
+        Toast.makeText(this, "Movie: " + movie.getMovieTitle() + " added to Widget Data", Toast.LENGTH_SHORT).show();
     }
 
 }

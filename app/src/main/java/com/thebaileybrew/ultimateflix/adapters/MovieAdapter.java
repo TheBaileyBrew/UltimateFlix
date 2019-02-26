@@ -1,14 +1,11 @@
 package com.thebaileybrew.ultimateflix.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import com.thebaileybrew.ultimateflix.R;
 import com.thebaileybrew.ultimateflix.models.Movie;
@@ -28,7 +25,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     public interface MovieAdapterClickHandler {
         void onClick(View view, Movie movie);
-        void onLongClick(View view, int movieID, String movieTitle, String movieRelease, String moviePath);
+        void onLongClick(View view, Movie movie);
     }
 
     //Create the recycler
@@ -46,12 +43,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     //Bind the Arraydata to the layoutview
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.e(TAG, "onBindViewHolder: current position" + position );
-        Log.e(TAG, "onBindViewHolder: size of collection " + movieCollection.size() );
         final Movie currentMovie = movieCollection.get(position);
-        Log.e(TAG, "onBindViewHolder: current poster" + currentMovie.getMoviePosterPath() );
         String moviePosterPath = UrlUtils.buildPosterPathUrl(currentMovie.getMoviePosterPath());
-        Log.e(TAG, "onBindViewHolder: poster path: " + moviePosterPath );
 
         Picasso.get()
                 .load(moviePosterPath)
@@ -103,7 +96,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         @Override
         public boolean onLongClick(View v) {
             Movie currentMovie = movieCollection.get(getAdapterPosition());
-            adapterClickHandler.onLongClick(v, currentMovie.getMovieID(), currentMovie.getMovieTitle(), currentMovie.getMovieReleaseDate(), currentMovie.getMoviePosterPath());
+            adapterClickHandler.onLongClick(v, currentMovie);
             return true;
         }
     }

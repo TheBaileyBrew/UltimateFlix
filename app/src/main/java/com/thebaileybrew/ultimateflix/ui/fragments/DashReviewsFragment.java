@@ -30,7 +30,6 @@ import static com.thebaileybrew.ultimateflix.database.ConstantUtils.MOVIE_KEY;
 public class DashReviewsFragment extends Fragment {
     private static final String TAG = DashReviewsFragment.class.getSimpleName();
 
-    private RecyclerView reviewRecycler;
     private int movieID;
     private List<Review> reviews = new ArrayList<>();
 
@@ -45,7 +44,7 @@ public class DashReviewsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_movie_reviews, container, false);
         ConstraintLayout noDataView = rootView.findViewById(R.id.no_reviews_constraint_layout);
-        reviewRecycler = rootView.findViewById(R.id.review_recycler);
+        RecyclerView reviewRecycler = rootView.findViewById(R.id.review_recycler);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UltimateFlix.getContext());
         reviewRecycler.setLayoutManager(linearLayoutManager);
         ReviewAdapter reviewAdapter = new ReviewAdapter(UltimateFlix.getContext(), reviews, new ReviewAdapter.ReviewClickHandler() {
@@ -65,7 +64,7 @@ public class DashReviewsFragment extends Fragment {
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
-            Log.e(TAG, "onCreateView: error", e);;
+            Log.e(TAG, "onCreateView: error", e);
         }
         if (reviews.isEmpty()) {
             noDataView.setVisibility(View.VISIBLE);

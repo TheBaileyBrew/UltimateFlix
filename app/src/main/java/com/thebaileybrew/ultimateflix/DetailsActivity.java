@@ -2,25 +2,16 @@ package com.thebaileybrew.ultimateflix;
 
 import android.content.Intent;
 import android.graphics.PorterDuff;
-import android.graphics.RectF;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 
 import com.flaviofaria.kenburnsview.KenBurnsView;
-import com.flaviofaria.kenburnsview.Transition;
-import com.flaviofaria.kenburnsview.TransitionGenerator;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 import com.thebaileybrew.ultimateflix.adapters.CreditsAdapter;
-import com.thebaileybrew.ultimateflix.database.MovieSnapshotViewModel;
 import com.thebaileybrew.ultimateflix.database.async.AsyncCreditsLoader;
 import com.thebaileybrew.ultimateflix.models.Credit;
 import com.thebaileybrew.ultimateflix.models.Movie;
@@ -30,24 +21,19 @@ import com.thebaileybrew.ultimateflix.ui.fragments.DashReviewsFragment;
 import com.thebaileybrew.ultimateflix.ui.fragments.DashTrailersFragment;
 import com.thebaileybrew.ultimateflix.utils.UrlUtils;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.transition.Fade;
 import android.transition.Slide;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -65,13 +51,8 @@ public class DetailsActivity extends AppCompatActivity {
     private Movie currentMovie = new Movie();
     private List<Credit> allCredits = new ArrayList<>();
     private String movieBackdrop;
-    private KenBurnsView backdropImage;
-    private Toolbar mToolbar;
 
-    private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference mMovieDatabaseReference;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+    private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
         @Override
@@ -104,8 +85,8 @@ public class DetailsActivity extends AppCompatActivity {
         }
         setupToolbarView();
 
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        mMovieDatabaseReference = mFirebaseDatabase.getReference();
+        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mMovieDatabaseReference = mFirebaseDatabase.getReference();
 
         initDiagView();
         initNavigationPanel();
@@ -113,10 +94,10 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void setupToolbarView() {
-        mToolbar = findViewById(R.id.toolbar);
+        Toolbar mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
+        mToolbar.getNavigationIcon().setColorFilter(ContextCompat.getColor(UltimateFlix.getContext(), R.color.colorPrimaryDark), PorterDuff.Mode.SRC_ATOP);
         getSupportActionBar().setTitle(null);
         getSupportActionBar().setSubtitle(null);
         getSupportActionBar().getThemedContext();
@@ -145,7 +126,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void initDiagView() {
-        backdropImage = findViewById(R.id.movie_backdrop);
+        KenBurnsView backdropImage = findViewById(R.id.movie_backdrop);
         String backdropImageResource = UrlUtils.buildBackdropUrl(currentMovie.getMovieBackdrop(), currentMovie.getMoviePosterPath());
         Picasso.get()
                 .load(backdropImageResource)
@@ -230,7 +211,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void initNavigationPanel() {
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navigation.setSelectedItemId(0);
         loadFragment(DASH_DETAILS);

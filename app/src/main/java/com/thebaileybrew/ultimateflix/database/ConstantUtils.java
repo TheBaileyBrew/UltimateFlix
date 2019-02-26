@@ -22,7 +22,6 @@ public class ConstantUtils {
     public static final String MOVIE_BACKDROP = "backdrop_path";
     public static final String MOVIE_SYNOPSIS = "overview";
     public static final String MOVIE_RELEASE_DATE = "release_date";
-    public static final String MOVIE_FAVORITE = "favorite";
 
     public static final String MOVIE_TAGLINE = "tagline";
     public static final String MOVIE_GENRE = "genres";
@@ -57,4 +56,11 @@ public class ConstantUtils {
     public static final String WIDGET_MOVIE_TITLE = "widget_title";
     public static final String WIDGET_MOVIE_RELEASE = "widget_release";
     public static final String WIDGET_MOVIE_POSTER = "widget_poster";
+    public static final String WIDGET_MOVIE_VOTE_COUNT = "widget_count";
+    public static final String WIDGET_MOVIE_VOTE_AVG = "widget_average";
+    public static final String WIDGET_MOVIE_POPULARITY = "widget_popularity";
+    public static final String WIDGET_MOVIE_LANGUAGE = "widget_language";
+    public static final String WIDGET_MOVIE_BACKDROP = "widget_backdrop";
+    public static final String WIDGET_MOVIE_OVERVIEW = "widget_overview";
+    public static final String WIDGET_MOVIE_FAVORITE = "widget_favorite";
 }

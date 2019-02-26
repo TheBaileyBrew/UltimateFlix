@@ -18,7 +18,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
 
     private final LayoutInflater layoutInflater;
     private List<Review> reviewList;
-    private ReviewClickHandler clickHandler;
+    private final ReviewClickHandler clickHandler;
 
     public interface ReviewClickHandler {
         void onClick(View view, Review review);

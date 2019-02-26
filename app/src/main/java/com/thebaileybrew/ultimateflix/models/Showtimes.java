@@ -1,6 +1,6 @@
 package com.thebaileybrew.ultimateflix.models;
 
-public class Showtimes {
+class Showtimes {
 
     private String theaterName;
     private String theaterLocation;
