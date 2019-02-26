@@ -4,7 +4,6 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.thebaileybrew.ultimateflix.database.async.AsyncMovieLoader;
@@ -23,8 +22,6 @@ public class UltimateFlix extends Application {
     private static List<Movie> allMovies = new ArrayList<>();
 
     private DatabaseReference mMoviesReference;
-
-    private FirebaseAuth mAuthUser;
 
     private String currentPage = "1";
     private int primaryKey = 0;

@@ -52,7 +52,7 @@
             android:shadowColor="@color/colorPrimaryDark"
             android:shadowRadius="6"
             android:layout_marginEnd="@dimen/margin_horizontal_8dp"
-            android:text="Release Date: "/>
+            android:text="@string/release_date"/>
         <TextView
             android:id="@+id/release_detail"
             android:layout_width="wrap_content"

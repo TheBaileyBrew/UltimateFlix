@@ -41,4 +41,15 @@
     <string name="refresh_network">Please check your network settings and try again</string>
     <string name="search_movies">Search movies..</string>
     <string name="refresh">Refresh</string>
+    <string name="release_date">Release Date:</string>
+    <string name="runtime">RUNTIME</string>
+    <string name="language">LANGUAGE</string>
+    <string name="budget">BUDGET</string>
+    <string name="revenue">REVENUE</string>
+    <string name="no_reviews">There are no reviews for this film</string>
+    <string name="no_trailers">There are no trailers for this film</string>
+    <string name="widget_image">widget_image</string>
+    <string name="video_trailer_image">video trailer image</string>
+    <string name="movie_toast">Movie:</string>
+    <string name="added_widget">added to Widget Data</string>
 </resources>

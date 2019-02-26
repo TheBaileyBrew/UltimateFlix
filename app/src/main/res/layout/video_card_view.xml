@@ -32,7 +32,7 @@
         android:layout_marginEnd="@dimen/half_margin_vertical_4dp"
         android:layout_marginBottom="@dimen/half_margin_vertical_4dp"
         android:scaleType="fitCenter"
-        android:contentDescription="video trailer image"/>
+        android:contentDescription="@string/video_trailer_image"/>
 
     <TextView
         android:id="@+id/video_type"

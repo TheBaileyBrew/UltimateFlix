@@ -97,7 +97,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/half_margin_vertical_4dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="RUNTIME"/>
+                android:text="@string/runtime"/>
             <TextView
                 android:id="@+id/runtime_detail"
                 android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryDark"
                 android:layout_marginTop="@dimen/half_margin_vertical_4dp"
-                android:text="LANGUAGE"/>
+                android:text="@string/language"/>
             <TextView
                 android:id="@+id/language_detail"
                 android:layout_width="wrap_content"
@@ -136,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/half_margin_vertical_4dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="BUDGET"/>
+                    android:text="@string/budget"/>
                 <TextView
                     android:id="@+id/budget_detail"
                     android:layout_width="wrap_content"
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/half_margin_vertical_4dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="REVENUE"/>
+                    android:text="@string/revenue"/>
                 <TextView
                     android:id="@+id/revenue_detail"
                     android:layout_width="wrap_content"

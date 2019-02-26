@@ -267,7 +267,7 @@ public class MovieSelectActivity extends AppCompatActivity implements MovieAdapt
         sharedPrefs.edit().putString(WIDGET_MOVIE_RELEASE, movie.getMovieReleaseDate()).apply();
         sharedPrefs.edit().putInt(WIDGET_MOVIE_FAVORITE, movie.getMovieFavorite()).apply();
 
-        Toast.makeText(this, "Movie: " + movie.getMovieTitle() + " added to Widget Data", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.movie_toast) + movie.getMovieTitle() + getString(R.string.added_widget), Toast.LENGTH_SHORT).show();
     }
 
 }

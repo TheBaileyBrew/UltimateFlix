@@ -29,7 +29,7 @@
             android:layout_marginRight="@dimen/large_margin_horizontal_32dp"
             android:textSize="@dimen/text_default28sp"
             android:textColor="@color/colorPrimaryDark"
-            android:text="There are no more reviews for this film"/>
+            android:text="@string/no_reviews"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

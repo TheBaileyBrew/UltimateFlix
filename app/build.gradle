@@ -1,6 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'key0'
+            keyPassword 'baileybrew'
+            storeFile file("$rootDir/keystore.jks")
+            storePassword 'baileybrew'
+            v2SigningEnabled true
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.thebaileybrew.ultimateflix"
@@ -17,35 +26,31 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+
         }
     }
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //Basic Layout objects
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-
+    //LifeCycle Components
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     //Image Loading
     implementation 'com.squareup.picasso:picasso:2.71828'
-
     //Custom Libraries
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
     implementation 'com.github.florent37:diagonallayout:1.0.9'
     implementation 'com.flaviofaria:kenburnsview:1.0.7'
-
     //Firebase Basic code
     implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.google.firebase:firebase-database:16.0.6'
-    //Firebase User Authentication
-    implementation 'com.google.firebase:firebase-auth:16.1.0'
-    implementation 'com.firebaseui:firebase-ui-auth:4.3.1'
-
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha01'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.2-alpha01'
-
 }
 
 apply plugin: 'com.google.gms.google-services'
