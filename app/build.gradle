@@ -6,8 +6,7 @@ android {
             keyAlias 'key0'
             keyPassword 'baileybrew'
             storeFile file("$rootDir/keystore.jks")
-            storePassword 'baileybrew'
-            v2SigningEnabled true
+            storePassword 'thebaileybrew'
         }
     }
     compileSdkVersion 28
@@ -27,7 +26,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
-
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
 }
